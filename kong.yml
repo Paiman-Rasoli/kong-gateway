@@ -1,0 +1,15 @@
+_format_version: "3.0"
+_transform: true
+
+services:
+  - name: media-service
+    url: http://host.docker.internal:9000
+    routes:
+      - name: upload-image
+        paths:
+         - /media/upload
+        strip_path: false
+      - name: retrieve-image
+        paths:
+          - "/media/retrieve"
+        strip_path: false
