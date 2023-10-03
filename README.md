@@ -1,0 +1,1 @@
+Django app and Kong CDN prototype demo app.
