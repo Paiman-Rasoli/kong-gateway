@@ -1,13 +1,23 @@
 _format_version: "3.0"
 _transform: true
 
+plugins:
+- name: request-transformer
+  service: media-service
+  config:
+    add:
+      headers:
+      - Content-Type:application/json
+
 services:
   - name: media-service
     url: http://host.docker.internal:9000
     routes:
       - name: upload-image
         paths:
-         - /media/upload
+         - /media/upload/
+        methods:
+          - "POST"
         strip_path: false
       - name: retrieve-image
         paths:
