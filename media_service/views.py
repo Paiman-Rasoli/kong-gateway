@@ -8,6 +8,7 @@ import os
 import io
 
 
+
 @csrf_exempt
 @require_POST
 def upload(request):
@@ -19,10 +20,11 @@ def upload(request):
             return JsonResponse({"message" : "file_path is required" , "status" : 400})
 
       if isExist(file_path):
-            new_media = MediaModel(name="file.png")
-            new_media.image.save(os.path.basename(file_path), get_file_data(file_path))
+            file_name = os.path.basename(file_path).split(".")[0]
+            new_media = MediaModel(name=file_name)
+            new_media.image.save(file_name, get_file_data(file_path))
             new_media.save()
-            return JsonResponse({"status" : 200 , "fileURL" : new_media.image.url})
+            return JsonResponse({"status" : 200 , "imageURL" : new_media.image.url , "imageName" : file_name})
       else:
             error = {
                   "status" : 400,
@@ -30,8 +32,16 @@ def upload(request):
             }
             return JsonResponse(error)
 
-def retrieve():
-      pass
+def retrieve(request):
+      file_name = request.GET.get("file_name")
+      if file_name == None:
+            return JsonResponse({"status" : 400 , "message" : "File Name is required"})
+      try:
+            find = MediaModel.objects.get(name=file_name)
+            return JsonResponse({"status" : 200 , "fileURL" : find.image.url})
+      except Exception as e:
+            print(e)
+            return JsonResponse({"status" : 404 , "message" : "image not found"})
 
 
 
