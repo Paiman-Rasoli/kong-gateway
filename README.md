@@ -11,3 +11,4 @@
 - For retrieving the image use this proxy url `http://localhost:8000/media/retrieve?file_name=nameOfFile`
 and in the params give the file name which already has been uploaded.
 Note: In this project I did not focused on Django a lot although we can do more refactor in django itself.
+- [20d46142-1c8f-4dd6-8e5d-48d154697d2f.webm](https://github.com/Paiman-Rasoli/kong-gateway/assets/83835010/7ab2cd75-9bfb-4c8c-9229-42a95af68c17)
